@@ -69,6 +69,12 @@ class LinkedList
   end
 
   def pop
+    node = @head
+    until node.next_node.nil?
+      previous_node = node
+      node = node.next_node
+    end
+    previous_node.next_node = nil
   end
 
   def contains?(value)
@@ -93,4 +99,6 @@ list.append(4)
 list.append(5)
 #list.prepend("this should be first")
 
-pp list.at(4)
+list.pop
+
+pp list.size

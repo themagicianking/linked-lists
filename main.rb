@@ -12,7 +12,7 @@ class LinkedList
       @head.next_node.value = value
     else
       node = @head.next_node
-      unless node.next_node.nil?
+      until node.next_node.nil?
         node = node.next_node
       end
       node.next_node = Node.new
@@ -29,21 +29,17 @@ class LinkedList
       @head.next_node.value = @head.value
       @head.value = value
     else
-      current_value = @head.value
-      @head.value = value
-      node = @head.next_node
-      unless node.value.nil?
-        next_value = node.value
-        node.value = current_value
-        current_value = next_value
-        node = node.next_node
-      end
-      node = Node.new
-      node.value = current_value
     end
   end
 
   def size
+    node = @head
+    number_of_nodes = 1
+    until node.next_node.nil?
+      number_of_nodes += 1
+      node = node.next_node
+    end
+    number_of_nodes
   end
 
   def head
@@ -51,9 +47,25 @@ class LinkedList
   end
 
   def tail
+    node = @head
+    until node.next_node.nil?
+      node = node.next_node
+    end
+    node
   end
 
   def at(index)
+    begin
+      node = @head
+      number_of_nodes = 0
+      until number_of_nodes == index
+        number_of_nodes += 1
+        node = node.next_node
+      end
+      node.value
+    rescue
+      nil
+    end
   end
 
   def pop
@@ -75,10 +87,10 @@ end
 
 list = LinkedList.new
 
+list.append(2)
 list.append(3)
 list.append(4)
 list.append(5)
-list.append(6)
-list.prepend("this should be first")
+#list.prepend("this should be first")
 
-pp list.head.next_node.next_node.next_node.value
+pp list.at(4)

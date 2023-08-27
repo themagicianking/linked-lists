@@ -78,6 +78,15 @@ class LinkedList
   end
 
   def contains?(value)
+    begin
+      node = @head
+      until node.value == value
+        node = node.next_node
+      end
+      true
+    rescue
+      false
+    end
   end
 
   def find(value)
@@ -101,4 +110,4 @@ list.append(5)
 
 list.pop
 
-pp list.size
+pp list.contains?(76)

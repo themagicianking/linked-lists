@@ -32,14 +32,16 @@ class LinkedList
       current_value = @head.value
       @head.value = value
       node = @head.next_node
-      unless node.value.nil?
-        next_value = node.value
+      next_value = node.value
+      until node.next_node.nil?
         node.value = current_value
         current_value = next_value
         node = node.next_node
+        next_value = node.value
       end
+      node.value = current_value
       node.next_node = Node.new
-      node.next_node.value = current_value
+      node.next_node.value = next_value
     end
   end
 
@@ -120,6 +122,7 @@ class LinkedList
       print "( #{node.value} ) -> "
       node = node.next_node
     end
+    print "( #{node.value} ) -> "
   end
 end
 

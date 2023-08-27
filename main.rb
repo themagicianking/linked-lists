@@ -1,20 +1,22 @@
 class LinkedList
-  attr_accessor :node, :value, :next_node
-
   def initialize
-    @node = Node.new
-    @node.value = nil
-    @node.next_node = nil
+    @head = Node.new
   end
 
   def append(value)
-    if @node.value.nil?
-      @node.value = value
-    elsif @node.next_node.nil?
-      @node.next_node = Node.new
-      @node.next_node.value = value
+    if @head.value.nil?
+      @head.value = value
+      @head.next_node = Node.new
+    elsif @head.next_node.value.nil?
+      @head.next_node.value = value
     else
-      @node.next_node.next_node.value = value
+      node = @head.next_node
+      unless node.value.nil?
+        node = node.next_node
+      end
+      node = Node.new
+      node.value = value
+      puts value
     end
   end
 
@@ -47,21 +49,11 @@ class LinkedList
 end
 
 class Node
-  attr_accessor :node, :value, :next_node
-
-  def value
-    @value
-  end
-
-  def next_node
-    @next_node
-  end
+  attr_accessor :value, :next_node
 end
 
 list = LinkedList.new
 
 list.append(3)
+list.append(4)
 list.append(5)
-list.append(9)
-
-list.node.value

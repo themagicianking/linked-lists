@@ -90,6 +90,17 @@ class LinkedList
   end
 
   def find(value)
+    begin
+      node = @head
+      index = 0
+        until node.value == value
+          index += 1
+          node = node.next_node
+        end
+      index
+    rescue
+      nil
+    end
   end
 
   def to_s
@@ -110,4 +121,4 @@ list.append(5)
 
 list.pop
 
-pp list.contains?(76)
+pp list.find(439876)

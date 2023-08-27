@@ -29,6 +29,17 @@ class LinkedList
       @head.next_node.value = @head.value
       @head.value = value
     else
+      current_value = @head.value
+      @head.value = value
+      node = @head.next_node
+      unless node.value.nil?
+        next_value = node.value
+        node.value = current_value
+        current_value = next_value
+        node = node.next_node
+      end
+      node.next_node = Node.new
+      node.next_node.value = current_value
     end
   end
 
@@ -104,6 +115,11 @@ class LinkedList
   end
 
   def to_s
+    node = @head
+    until node.next_node.nil?
+      print "( #{node.value} ) -> "
+      node = node.next_node
+    end
   end
 end
 
@@ -113,12 +129,10 @@ end
 
 list = LinkedList.new
 
+list.append(1)
 list.append(2)
 list.append(3)
 list.append(4)
-list.append(5)
-#list.prepend("this should be first")
+list.prepend("this should be first")
 
-list.pop
-
-pp list.find(439876)
+pp list.to_s

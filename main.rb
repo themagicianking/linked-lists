@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
+# this class implements linked lists
 class LinkedList
+  attr_reader :head
 
   def initialize
     @head = Node.new
@@ -55,10 +59,6 @@ class LinkedList
     number_of_nodes
   end
 
-  def head
-    @head
-  end
-
   def tail
     node = @head
     until node.next_node.nil?
@@ -106,10 +106,10 @@ class LinkedList
     begin
       node = @head
       index = 0
-        until node.value == value
-          index += 1
-          node = node.next_node
-        end
+      until node.value == value
+        index += 1
+        node = node.next_node
+      end
       index
     rescue
       nil
@@ -126,16 +126,7 @@ class LinkedList
   end
 end
 
+# this class implements nodes
 class Node
   attr_accessor :value, :next_node
 end
-
-list = LinkedList.new
-
-list.append(1)
-list.append(2)
-list.append(3)
-list.append(4)
-list.prepend("this should be first")
-
-pp list.to_s
